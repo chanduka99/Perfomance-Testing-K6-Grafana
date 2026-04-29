@@ -1,4 +1,4 @@
-version: '3.4'
+# version: '3.4'
 
 networks:
   k6:
@@ -16,6 +16,8 @@ services:
       - "8086:8086"
     environment:
       - INFLUXDB_DB=k6
+    volumes:
+      - ./influxdb:/var/lib/influxdb 
 
   grafana:
     image: grafana/grafana:8.5.21
@@ -61,3 +63,4 @@ services:
       - K6_OUT=influxdb=http://influxdb:8086/k6
     volumes:
       - ./scripts:/scripts
+      - ./results:/results
